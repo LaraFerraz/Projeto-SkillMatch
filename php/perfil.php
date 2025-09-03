@@ -86,6 +86,33 @@
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
+
+                    <hr class="my-4">
+
+                    <h4 class="fw-bold mb-4"><i class="fas fa-chart-line text-info me-2"></i> Estatísticas do Perfil</h4>
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card p-3">
+                                <i class="fas fa-eye stat-icon"></i>
+                                <h5 class="fw-bold mt-2">1,540</h5>
+                                <p class="text-muted mb-0">Visualizações</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card p-3">
+                                <i class="fab fa-whatsapp stat-icon-whatsapp"></i>
+                                <h5 class="fw-bold mt-2">78</h5>
+                                <p class="text-muted mb-0">Contatos (WhatsApp)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card p-3">
+                                <i class="fas fa-search stat-icon"></i>
+                                <h5 class="fw-bold mt-2">2,100</h5>
+                                <p class="text-muted mb-0">Pesquisas por Serviço</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

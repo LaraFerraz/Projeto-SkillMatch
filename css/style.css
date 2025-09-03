@@ -132,7 +132,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 .why-choose-section {
     background-color: #fff;
 }
@@ -423,8 +422,6 @@ footer p, footer a {
 .content-top-padding {
     padding-top: 10rem; 
 }
-/* ... Outros estilos ... */
-
 /* Estilos para a página de cadastro de fornecedores */
 .cadastro-page {
     background-color: var(--light-gray);
@@ -458,8 +455,6 @@ footer p, footer a {
     border-radius: 50px;
 }
 
-/* ... Outros estilos ... */
-
 /* Estilos para a página de login */
 .login-page {
     background-color: var(--light-gray);
@@ -489,40 +484,6 @@ footer p, footer a {
 }
 
 /* Estilos para a seção de perfil e carrossel */
-.profile-dashboard {
-    padding: 3rem 0;
-}
-.profile-card {
-    background-color: #fff;
-    border-radius: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-.rating-display .main-rating {
-    font-size: 4rem;
-    line-height: 1;
-}
-.rating-display .stars {
-    color: var(--secondary-color);
-}
-
-.tip-item {
-    background-color: #f8f9fa;
-    border-radius: 1rem;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.carousel-control-prev, .carousel-control-next {
-    filter: invert(100%);
-    opacity: 0.7;
-}
-.carousel-control-prev:hover, .carousel-control-next:hover {
-    opacity: 1;
-}
-/* ... Outros estilos ... */
-
-/* Estilos para a página de perfil do profissional */
 .profile-page {
     background-color: var(--light-gray);
 }
@@ -531,7 +492,6 @@ footer p, footer a {
     border-radius: 1.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
-
 .rating-display .main-rating {
     font-size: 4rem;
     line-height: 1;
@@ -553,4 +513,24 @@ footer p, footer a {
 }
 .carousel-control-prev:hover, .carousel-control-next:hover {
     opacity: 1;
+}
+
+/* Novos estilos para os cards de estatísticas */
+.stat-card {
+    background-color: #fff;
+    border-radius: 1rem;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+}
+.stat-icon-whatsapp {
+    font-size: 2.5rem;
+    color: #25d366; /* Cor do WhatsApp */
 }

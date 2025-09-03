@@ -1,4 +1,3 @@
-
 <?php
 // Simula a busca de dados de um fornecedor
 $id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -125,10 +124,6 @@ $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
                                 <i class="far fa-star text-warning" data-rating="4"></i>
                                 <i class="far fa-star text-warning" data-rating="5"></i>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reviewComment" class="form-label">Comentário (opcional)</label>
-                            <textarea class="form-control" id="reviewComment" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
                     </form>

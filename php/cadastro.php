@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="localidade" class="form-label fw-bold">Localidade (Cidade/Estado)</label>
-                                <input type="text" class="form-control" id="localidade" name="localidade" placeholder="Ex: São Paulo, SP" required>
+                                <input type="text" class="form-control" id="localidade" name="localidade" placeholder="Ex: Campo Mourão, PR" required>
                             </div>
                             <div class="col-12">
                                 <label for="descricao" class="form-label fw-bold">Descrição dos Serviços</label>
