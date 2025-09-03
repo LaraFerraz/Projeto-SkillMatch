@@ -38,7 +38,7 @@
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <h5 class="fw-bold">Prestadores Verificados</h5>
-                <p>Todos os profissionais passam por rigoroso processo de verificação e avaliação de qualidade.</p>
+                <p>Todos os profissionais passam por processo de verificação e avaliação de qualidade pelos próprios usuários.</p>
             </div>
             <div class="col-md-3">
                 <div class="feature-icon mb-3">
@@ -202,14 +202,6 @@
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-secondary-blue me-3" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se Gratuitamente <i class="fa-solid fa-arrow-right"></i></button>
             <a href="#" class="btn btn-outline-white-border">Saiba Mais</a>
-        </div>
-        <div class="mt-4 info-list">
-            <span class="me-3"><i class="fa-solid fa-check"></i> Cadastro 100% gratuito</span>
-            <span class="me-3"><i class="fa-solid fa-check"></i> Sem taxas ocultas</span>
-            <span class="me-3"><i class="fa-solid fa-check"></i> Cancelamento a qualquer momento</span>
-            <span class="me-3"><i class="fa-solid fa-check"></i> SSL Seguro</span>
-            <span class="me-3"><i class="fa-solid fa-check"></i> Dados Protegidos</span>
-            <span><i class="fa-solid fa-check"></i> Suporte 24/7</span>
         </div>
     </div>
 </section>

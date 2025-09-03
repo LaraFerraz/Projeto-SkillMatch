@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #1A3B6F; /* Azul Escuro */
+     --primary-color: #27487e; /* Azul Escuro */
     --secondary-color: #4A90E2; /* Azul Claro */
-    --dark-blue: #142845; /* Azul bem escuro para botões */
+    --dark-blue: #0b1729; /* Azul bem escuro para botões */
     --light-gray: #f8f9fa;
     --wave-blue: #4A90E2; /* Azul para as ondas */
     --wave-gray: #888aa3; /* Cinza para as ondas */
@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar {
-    background-color: var(--primary-color) !important;
+    background-color: #0d1a2d !important;
     box-shadow: 0 4px 6px -1px rgba(26, 59, 111, 0.4);
 }
 
@@ -48,7 +48,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50px;
 }
 
-/* Hero Section */
 .hero-section {
     background-color: var(--primary-color);
     color: #fff;
@@ -133,7 +132,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Why Choose Section */
+
 .why-choose-section {
     background-color: #fff;
 }
@@ -161,7 +160,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--secondary-color);
 }
 
-/* How It Works Section */
 .how-it-works-section {
     background-color: #fff;
 }
@@ -209,7 +207,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
-/* Estilo das Ondas */
 .waves-container {
     position: relative;
     padding-top: 50px;
@@ -260,7 +257,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Popular Services Section */
 .popular-services-section {
     background-color: var(--light-gray);
 }
@@ -301,7 +297,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-/* CTA Section */
 .cta-section {
     background-color: var(--primary-color);
 }
@@ -317,9 +312,8 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-/* Footer */
 footer {
-    background-color: var(--primary-color);
+    background-color: #0b1729;
     color: #fff;
 }
 footer h5 {
@@ -347,7 +341,7 @@ footer p, footer a {
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Estilos da barra de pesquisa */
+
 .search-bar .form-control {
     border-radius: 50px 0 0 50px;
     padding: 1rem 1.5rem;
@@ -365,7 +359,7 @@ footer p, footer a {
 .search-bar .btn-search:hover {
     background-color: #3e7fcc;
 }
-/* Estilos dos Cards de Serviço */
+
 .service-card {
     background-color: #fff;
     border-radius: 1rem;
@@ -397,7 +391,7 @@ footer p, footer a {
     font-size: 0.9rem;
     color: #666;
 }
-/* Estilos da página de detalhes do fornecedor */
+
 .provider-details-page {
     padding-top: 10rem;
 }
@@ -426,7 +420,6 @@ footer p, footer a {
 .review-form-section .star-rating i {
     transition: color 0.2s;
 }
-/* Espaçamento para o conteúdo abaixo do navbar fixo */
 .content-top-padding {
-    padding-top: 6rem; /* Ajuste o valor conforme a altura do seu navbar */
+    padding-top: 10rem; 
 }

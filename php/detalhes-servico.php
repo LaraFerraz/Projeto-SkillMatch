@@ -62,13 +62,12 @@ $fornecedor = [
     ]
 ];
 
-// Pega o fornecedor correto ou define um padrão
 $fornecedor_atual = $fornecedor[$id] ?? $fornecedor[1];
 $avaliacao_int = floor($fornecedor_atual['avaliacao']);
 $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
 ?>
 
-<section class="provider-details-page py-5">
+<section class="provider-details-page py-5 content-top-padding">
     <div class="container">
         <div class="row">
             <div class="col-md-4 text-center">

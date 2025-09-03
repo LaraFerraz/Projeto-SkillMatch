@@ -94,15 +94,14 @@
                 <h5 class="mb-3">Contato</h5>
                 <ul class="list-unstyled">
                     <li class="d-flex align-items-center mb-2"><i class="fas fa-envelope me-2"></i> contato@skillmatch.com</li>
-                    <li class="d-flex align-items-center mb-2"><i class="fas fa-phone-alt me-2"></i> (11) 9 9999-9999</li>
-                    <li class="d-flex align-items-center"><i class="fas fa-map-marker-alt me-2"></i> São Paulo, SP Brasil</li>
+                    <li class="d-flex align-items-center mb-2"><i class="fas fa-phone-alt me-2"></i> (44) 9 9999-9999</li>
+                    <li class="d-flex align-items-center"><i class="fas fa-map-marker-alt me-2"></i> Campo Mourão, PR - Brasil</li>
                 </ul>
             </div>
         </div>
         <hr class="footer-hr">
         <div class="d-flex justify-content-between align-items-center mt-3">
             <p class="mb-0">&copy; 2025 SkillMatch. Todos os direitos reservados.</p>
-            <p class="mb-0">Feito com <i class="fa-solid fa-heart text-danger"></i> no Brasil</p>
         </div>
     </div>
 </footer>
