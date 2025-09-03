@@ -423,3 +423,134 @@ footer p, footer a {
 .content-top-padding {
     padding-top: 10rem; 
 }
+/* ... Outros estilos ... */
+
+/* Estilos para a página de cadastro de fornecedores */
+.cadastro-page {
+    background-color: var(--light-gray);
+}
+.cadastro-card {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-color: #ccc;
+    transition: border-color 0.3s;
+}
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+}
+.form-select {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-color: #ccc;
+}
+.form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+}
+.btn-lg {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+}
+
+/* ... Outros estilos ... */
+
+/* Estilos para a página de login */
+.login-page {
+    background-color: var(--light-gray);
+}
+.login-card {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.text-secondary-highlight {
+    color: var(--secondary-color);
+}
+.btn-outline-secondary-blue {
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    background-color: transparent;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+.btn-outline-secondary-blue:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+.btn-dark-blue.btn-lg {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+}
+
+/* Estilos para a seção de perfil e carrossel */
+.profile-dashboard {
+    padding: 3rem 0;
+}
+.profile-card {
+    background-color: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+.rating-display .main-rating {
+    font-size: 4rem;
+    line-height: 1;
+}
+.rating-display .stars {
+    color: var(--secondary-color);
+}
+
+.tip-item {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(100%);
+    opacity: 0.7;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    opacity: 1;
+}
+/* ... Outros estilos ... */
+
+/* Estilos para a página de perfil do profissional */
+.profile-page {
+    background-color: var(--light-gray);
+}
+.profile-card {
+    background-color: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.rating-display .main-rating {
+    font-size: 4rem;
+    line-height: 1;
+}
+.rating-display .stars {
+    color: var(--secondary-color);
+}
+.tip-item {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(100%);
+    opacity: 0.7;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    opacity: 1;
+}

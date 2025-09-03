@@ -24,18 +24,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=servicos">Serviços</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#como-funciona">Como Funciona</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=contato">Contato</a>
-                </li>
             </ul>
             <div class="d-flex">
-                <a href="#" class="btn btn-login me-2">
+                <a href="index.php?page=login" class="btn btn-login me-2">
                     <i class="fa-solid fa-right-to-bracket me-2"></i>Login
                 </a>
-                <a href="#" class="btn btn-cadastro">
+                <a href="index.php?page=cadastro" class="btn btn-cadastro">
                     <i class="fa-solid fa-user-plus me-2"></i>Cadastro
                 </a>
             </div>
