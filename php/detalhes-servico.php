@@ -68,9 +68,9 @@ $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
 
 <section class="provider-details-page py-5 content-top-padding">
     <div class="container">
-        <div class="row">
+        <div class="row d-flex align-items-start">
             <div class="col-md-4 text-center">
-                <img src="<?php echo $fornecedor_atual['foto']; ?>" class="profile-img mb-3" alt="Foto de Perfil">
+                <img src="<?php echo $fornecedor_atual['foto']; ?>" class="profile-img mb-3 mx-auto" alt="Foto de Perfil">
                 <h3 class="fw-bold mb-1"><?php echo $fornecedor_atual['nome']; ?></h3>
                 <p class="text-muted"><?php echo $fornecedor_atual['servico']; ?></p>
                 <div class="rating mb-3">

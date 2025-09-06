@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=servicos">Serviços</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=sobre">Sobre</a>
+                </li>
             </ul>
             <div class="d-flex">
                 <a href="index.php?page=login" class="btn btn-login me-2">
@@ -71,17 +74,15 @@
                     <li><a href="#" class="text-white text-decoration-none">Sobre Nós</a></li>
                     <li><a href="#como-funciona" class="text-white text-decoration-none">Como Funciona</a></li>
                     <li><a href="#" class="text-white text-decoration-none">Seja um Profissional</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Central de Ajuda</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Blog</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-4">
                 <h5 class="mb-3">Legal</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white text-decoration-none">Política de Privacidade</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Termos de Uso</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Política de Cookies</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">LGPD</a></li>
+                    <li><a href="index.php?page=legal#politica-de-privacidade" class="text-white text-decoration-none">Política de Privacidade</a></li>
+                    <li><a href=""index.php?page=legal#termos-uso class="text-white text-decoration-none">Termos de Uso</a></li>
+                    <li><a href="index.php?page=legal#cookies" class="text-white text-decoration-none">Política de Cookies</a></li>
+                    <li><a href="index.php?page=legal#lgpd" class="text-white text-decoration-none">LGPD</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-4">

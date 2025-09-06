@@ -1,5 +1,7 @@
 <section class="profile-page py-5 content-top-padding">
     <div class="container">
+        <br>
+        <br>
         <h2 class="text-center fw-bold mb-4">Bem-vindo(a), [Nome do Profissional]!</h2>
         <p class="lead text-center mb-5">Gerencie seu perfil, veja suas avaliações e expanda seu negócio com nossas dicas exclusivas.</p>
 

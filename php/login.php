@@ -3,6 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
                 <div class="card p-4 login-card">
+                    <br>
                     <h2 class="text-center fw-bold mb-4">Acesse sua Conta</h2>
                     <p class="text-center text-muted mb-4">Entre para gerenciar seu perfil, clientes e avaliações.</p>
                     <form action="index.php?page=perfil" method="POST">

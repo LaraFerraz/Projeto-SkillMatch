@@ -1,4 +1,4 @@
-<section class="hero-section text-center text-white py-5">
+<section class="hero-section text-center text-white py-5 content-top-padding">
     <div class="container d-flex align-items-center justify-content-center">
         <div class="row align-items-center">
             <div class="col-md-7 text-md-start">
@@ -200,61 +200,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary-blue me-3" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se Gratuitamente <i class="fa-solid fa-arrow-right"></i></button>
-            <a href="#" class="btn btn-outline-white-border">Saiba Mais</a>
-        </div>
+             <a href="index.php?page=cadastro" class="btn btn-secondary-blue me-3">Cadastre-se</a>
+            <a href="index.php?page=sobre" class="btn btn-secondary-blue me-3">Saiba Mais</a>
     </div>
 </section>
-
-<div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Novo Serviço</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formCadastro">
-                    <div class="mb-3">
-                        <label for="nomeServico" class="form-label">Nome do Serviço</label>
-                        <input type="text" class="form-control" id="nomeServico" name="nomeServico" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="descricao" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="descricao" name="descricao" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="categoria" class="form-label">Categoria</label>
-                        <select class="form-select" id="categoria" name="categoria" required>
-                            <option value="">Selecione uma categoria</option>
-                            <option value="eletricista">Eletricista</option>
-                            <option value="pintor">Pintor</option>
-                            <option value="programacao">Programação</option>
-                            <option value="jardinagem">Jardinagem</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="responsavel" class="form-label">Responsável</label>
-                        <input type="text" class="form-control" id="responsavel" name="responsavel" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="status" required>
-                            <option value="">Selecione o status</option>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Enviar Cadastro</button>
-                </form>
-                <div id="feedback-success" class="alert alert-success mt-3 d-none" role="alert">
-                    Serviço cadastrado com sucesso!
-                </div>
-                <div id="feedback-error" class="alert alert-danger mt-3 d-none" role="alert">
-                    Por favor, preencha todos os campos obrigatórios.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

@@ -4,7 +4,6 @@
     --dark-blue: #0b1729; /* Azul bem escuro para botões */
     --light-gray: #f8f9fa;
     --wave-blue: #4A90E2; /* Azul para as ondas */
-    --wave-gray: #888aa3; /* Cinza para as ondas */
 }
 
 body {
@@ -515,7 +514,7 @@ footer p, footer a {
     opacity: 1;
 }
 
-/* Novos estilos para os cards de estatísticas */
+
 .stat-card {
     background-color: #fff;
     border-radius: 1rem;
@@ -532,5 +531,8 @@ footer p, footer a {
 }
 .stat-icon-whatsapp {
     font-size: 2.5rem;
-    color: #25d366; /* Cor do WhatsApp */
+    color: #25d366; 
+}
+.content-top-padding {
+    padding-top: 70px; 
 }
