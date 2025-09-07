@@ -71,9 +71,8 @@
             <div class="col-md-3 mb-4">
                 <h5 class="mb-3">Links Rápidos</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white text-decoration-none">Sobre Nós</a></li>
-                    <li><a href="#como-funciona" class="text-white text-decoration-none">Como Funciona</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Seja um Profissional</a></li>
+                    <li><a href="index.php?page=sobre" class="text-white text-decoration-none">Sobre Nós</a></li>
+                    <li><a href="index.php?page=cadastro" class="text-white text-decoration-none">Seja um Profissional</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-4">

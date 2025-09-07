@@ -23,13 +23,232 @@
                             <input type="tel" class="form-control" id="profileTel" value="(11) 98765-4321" required>
                         </div>
                         <div class="mb-3">
+                            <label for="profileServico" class="form-label fw-bold">Tipo de Serviço</label>
+                            <input type="text" class="form-control" id="profileServico" value="Eletricista Residencial e Comercial" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileCategoria1" class="form-label fw-bold">Categoria de Serviço 1</label>
+                            <select class="form-select" id="profileCategoria1" name="categoria1" required>
+                                <option selected disabled value="">Selecione uma categoria...</option>
+                                <optgroup label="Beleza e Estética">
+                                    <option value="cabeleireiro">Cabeleireiro</option>
+                                    <option value="manicure">Manicure/Pedicure</option>
+                                    <option value="depilador">Depilador</option>
+                                    <option value="maquiador">Maquiador</option>
+                                    <option value="esteticista_animal">Esteticista de Animais</option>
+                                    <option value="podologo">Podólogo</option>
+                                    <option value="massagista">Massagista</option>
+                                    <option value="tatuador">Tatuador</option>
+                                </optgroup>
+                                <optgroup label="Reforma e Manutenção">
+                                    <option value="pintor">Pintor</option>
+                                    <option value="eletricista" selected>Eletricista</option>
+                                    <option value="encanador">Encanador</option>
+                                    <option value="jardineiro">Jardineiro</option>
+                                    <option value="pedreiro">Pedreiro</option>
+                                    <option value="marceneiro">Marceneiro</option>
+                                    <option value="vidraceiro">Vidraceiro</option>
+                                    <option value="instalador_antena">Instalador de Antenas</option>
+                                    <option value="chaveiro">Chaveiro</option>
+                                    <option value="diarista">Diarista</option>
+                                    <option value="lavadeiro">Lavadeiro de Roupas</option>
+                                </optgroup>
+                                <optgroup label="Alimentação">
+                                    <option value="padeiro">Padeiro</option>
+                                    <option value="cozinheiro">Cozinheiro</option>
+                                    <option value="salgadeiro">Salgadeiro</option>
+                                </optgroup>
+                                <optgroup label="Eventos e Festas">
+                                    <option value="animador_festas">Animador de Festas</option>
+                                    <option value="organizador_eventos">Organizador de Eventos</option>
+                                    <option value="cerimonialista">Cerimonialista</option>
+                                    <option value="musico">Músico</option>
+                                    <option value="dj">DJ/VJ</option>
+                                </optgroup>
+                                <optgroup label="Tecnologia e Design">
+                                    <option value="programador">Programador</option>
+                                    <option value="tecnico_ti">Técnico de Manutenção de Computadores</option>
+                                    <option value="webdesigner">Webdesigner</option>
+                                    <option value="editor_video">Editor de Vídeo</option>
+                                    <option value="fotografo">Fotógrafo</option>
+                                    <option value="designer_interiores">Designer de Interiores</option>
+                                </optgroup>
+                                <optgroup label="Educação e Treinamento">
+                                    <option value="instrutor">Instrutor de Cursos Livres</option>
+                                    <option value="professor">Professor Particular</option>
+                                    <option value="treinador_esportes">Treinador de Esportes</option>
+                                </optgroup>
+                                <optgroup label="Negócios">
+                                    <option value="digitador">Digitador</option>
+                                    <option value="promotor_vendas">Promotor de Vendas</option>
+                                    <option value="secretaria">Secretária Remota/Assistente Administrativo</option>
+                                    <option value="comerciante">Comerciante de Artigos</option>
+                                </optgroup>
+                                <optgroup label="Outros">
+                                    <option value="motorista">Motorista de Aplicativo</option>
+                                    <option value="guia_turismo">Guia de Turismo</option>
+                                    <option value="artesao">Artesão</option>
+                                    <option value="costureiro">Costureiro</option>
+                                    <option value="outros">Outros</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileCategoria2" class="form-label fw-bold">Categoria de Serviço 2</label>
+                            <select class="form-select" id="profileCategoria2" name="categoria2">
+                                <option selected disabled value="">Selecione uma categoria...</option>
+                                <optgroup label="Beleza e Estética">
+                                    <option value="cabeleireiro">Cabeleireiro</option>
+                                    <option value="manicure">Manicure/Pedicure</option>
+                                    <option value="depilador">Depilador</option>
+                                    <option value="maquiador">Maquiador</option>
+                                    <option value="esteticista_animal">Esteticista de Animais</option>
+                                    <option value="podologo">Podólogo</option>
+                                    <option value="massagista">Massagista</option>
+                                    <option value="tatuador">Tatuador</option>
+                                </optgroup>
+                                <optgroup label="Reforma e Manutenção">
+                                    <option value="pintor">Pintor</option>
+                                    <option value="eletricista">Eletricista</option>
+                                    <option value="encanador">Encanador</option>
+                                    <option value="jardineiro">Jardineiro</option>
+                                    <option value="pedreiro">Pedreiro</option>
+                                    <option value="marceneiro">Marceneiro</option>
+                                    <option value="vidraceiro">Vidraceiro</option>
+                                    <option value="instalador_antena">Instalador de Antenas</option>
+                                    <option value="chaveiro">Chaveiro</option>
+                                    <option value="diarista">Diarista</option>
+                                    <option value="lavadeiro">Lavadeiro de Roupas</option>
+                                </optgroup>
+                                <optgroup label="Alimentação">
+                                    <option value="padeiro">Padeiro</option>
+                                    <option value="cozinheiro">Cozinheiro</option>
+                                    <option value="salgadeiro">Salgadeiro</option>
+                                </optgroup>
+                                <optgroup label="Eventos e Festas">
+                                    <option value="animador_festas">Animador de Festas</option>
+                                    <option value="organizador_eventos">Organizador de Eventos</option>
+                                    <option value="cerimonialista">Cerimonialista</option>
+                                    <option value="musico">Músico</option>
+                                    <option value="dj">DJ/VJ</option>
+                                </optgroup>
+                                <optgroup label="Tecnologia e Design">
+                                    <option value="programador">Programador</option>
+                                    <option value="tecnico_ti">Técnico de Manutenção de Computadores</option>
+                                    <option value="webdesigner">Webdesigner</option>
+                                    <option value="editor_video">Editor de Vídeo</option>
+                                    <option value="fotografo">Fotógrafo</option>
+                                    <option value="designer_interiores">Designer de Interiores</option>
+                                </optgroup>
+                                <optgroup label="Educação e Treinamento">
+                                    <option value="instrutor">Instrutor de Cursos Livres</option>
+                                    <option value="professor">Professor Particular</option>
+                                    <option value="treinador_esportes">Treinador de Esportes</option>
+                                </optgroup>
+                                <optgroup label="Negócios">
+                                    <option value="digitador">Digitador</option>
+                                    <option value="promotor_vendas">Promotor de Vendas</option>
+                                    <option value="secretaria">Secretária Remota/Assistente Administrativo</option>
+                                    <option value="comerciante">Comerciante de Artigos</option>
+                                </optgroup>
+                                <optgroup label="Outros">
+                                    <option value="motorista">Motorista de Aplicativo</option>
+                                    <option value="guia_turismo">Guia de Turismo</option>
+                                    <option value="artesao">Artesão</option>
+                                    <option value="costureiro">Costureiro</option>
+                                    <option value="outros">Outros</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileCategoria3" class="form-label fw-bold">Categoria de Serviço 3</label>
+                            <select class="form-select" id="profileCategoria3" name="categoria3">
+                                <option selected disabled value="">Selecione uma categoria...</option>
+                                <optgroup label="Beleza e Estética">
+                                    <option value="cabeleireiro">Cabeleireiro</option>
+                                    <option value="manicure">Manicure/Pedicure</option>
+                                    <option value="depilador">Depilador</option>
+                                    <option value="maquiador">Maquiador</option>
+                                    <option value="esteticista_animal">Esteticista de Animais</option>
+                                    <option value="podologo">Podólogo</option>
+                                    <option value="massagista">Massagista</option>
+                                    <option value="tatuador">Tatuador</option>
+                                </optgroup>
+                                <optgroup label="Reforma e Manutenção">
+                                    <option value="pintor">Pintor</option>
+                                    <option value="eletricista">Eletricista</option>
+                                    <option value="encanador">Encanador</option>
+                                    <option value="jardineiro">Jardineiro</option>
+                                    <option value="pedreiro">Pedreiro</option>
+                                    <option value="marceneiro">Marceneiro</option>
+                                    <option value="vidraceiro">Vidraceiro</option>
+                                    <option value="instalador_antena">Instalador de Antenas</option>
+                                    <option value="chaveiro">Chaveiro</option>
+                                    <option value="diarista">Diarista</option>
+                                    <option value="lavadeiro">Lavadeiro de Roupas</option>
+                                </optgroup>
+                                <optgroup label="Alimentação">
+                                    <option value="padeiro">Padeiro</option>
+                                    <option value="cozinheiro">Cozinheiro</option>
+                                    <option value="salgadeiro">Salgadeiro</option>
+                                </optgroup>
+                                <optgroup label="Eventos e Festas">
+                                    <option value="animador_festas">Animador de Festas</option>
+                                    <option value="organizador_eventos">Organizador de Eventos</option>
+                                    <option value="cerimonialista">Cerimonialista</option>
+                                    <option value="musico">Músico</option>
+                                    <option value="dj">DJ/VJ</option>
+                                </optgroup>
+                                <optgroup label="Tecnologia e Design">
+                                    <option value="programador">Programador</option>
+                                    <option value="tecnico_ti">Técnico de Manutenção de Computadores</option>
+                                    <option value="webdesigner">Webdesigner</option>
+                                    <option value="editor_video">Editor de Vídeo</option>
+                                    <option value="fotografo">Fotógrafo</option>
+                                    <option value="designer_interiores">Designer de Interiores</option>
+                                </optgroup>
+                                <optgroup label="Educação e Treinamento">
+                                    <option value="instrutor">Instrutor de Cursos Livres</option>
+                                    <option value="professor">Professor Particular</option>
+                                    <option value="treinador_esportes">Treinador de Esportes</option>
+                                </optgroup>
+                                <optgroup label="Negócios">
+                                    <option value="digitador">Digitador</option>
+                                    <option value="promotor_vendas">Promotor de Vendas</option>
+                                    <option value="secretaria">Secretária Remota/Assistente Administrativo</option>
+                                    <option value="comerciante">Comerciante de Artigos</option>
+                                </optgroup>
+                                <optgroup label="Outros">
+                                    <option value="motorista">Motorista de Aplicativo</option>
+                                    <option value="guia_turismo">Guia de Turismo</option>
+                                    <option value="artesao">Artesão</option>
+                                    <option value="costureiro">Costureiro</option>
+                                    <option value="outros">Outros</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileLocalidade" class="form-label fw-bold">Localidade (Cidade/Estado)</label>
+                            <input type="text" class="form-control" id="profileLocalidade" value="Campo Mourão, PR" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="profileDesc" class="form-label fw-bold">Descrição</label>
-                            <textarea class="form-control" id="profileDesc" rows="4">Eletricista com mais de 10 anos de experiência...</textarea>
+                            <textarea class="form-control" id="profileDesc" rows="4">Eletricista com mais de 10 anos de experiência em instalações residenciais e comerciais. Realizo reparos, manutenção, e instalações elétricas seguras e de alta qualidade. Orçamento sem compromisso.</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileHorario" class="form-label fw-bold">Horário de Trabalho</label>
+                            <input type="text" class="form-control" id="profileHorario" value="Seg. a Sex. das 08h às 18h">
                         </div>
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-dark-blue">Salvar Alterações</button>
                         </div>
                     </form>
+
+                    <hr class="my-4">
+                    
+                    <div class="d-grid mt-4">
+                        <button type="button" class="btn btn-danger fw-bold">Deletar Perfil</button>
+                    </div>
 
                     <hr class="my-4">
 
@@ -44,13 +263,6 @@
                             <i class="fas fa-star-half-alt text-warning"></i>
                         </div>
                         <p class="text-muted">Baseado em 125 avaliações</p>
-                    </div>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-comment me-2"></i> "Ótimo serviço, recomendo!" - Maria S.</li>
-                        <li><i class="fas fa-comment me-2"></i> "Rápido e profissional." - João P.</li>
-                    </ul>
-                    <div class="d-grid mt-3">
-                        <a href="#" class="btn btn-outline-secondary-blue">Ver Todas as Avaliações</a>
                     </div>
                 </div>
             </div>

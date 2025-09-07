@@ -64,6 +64,11 @@ $fornecedor = [
 $fornecedor_atual = $fornecedor[$id] ?? $fornecedor[1];
 $avaliacao_int = floor($fornecedor_atual['avaliacao']);
 $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
+
+// Extrai apenas os dígitos do telefone para o link do WhatsApp
+$telefone_whatsapp = preg_replace('/[^0-9]/', '', $fornecedor_atual['contato']['telefone']);
+$mensagem_whatsapp = "Olá, vim pelo site SkillMatch e gostaria de mais informações sobre seus serviços.";
+$link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode($mensagem_whatsapp);
 ?>
 
 <section class="provider-details-page py-5 content-top-padding">
@@ -90,6 +95,11 @@ $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
                 <div class="contact-info">
                     <p><i class="fas fa-phone-alt me-2 text-primary"></i> <?php echo $fornecedor_atual['contato']['telefone']; ?></p>
                     <p><i class="fas fa-envelope me-2 text-primary"></i> <?php echo $fornecedor_atual['contato']['email']; ?></p>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <a href="<?php echo $link_whatsapp; ?>" class="btn btn-success fw-bold" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i> Contato via WhatsApp
+                    </a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -128,7 +138,6 @@ $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
                         <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
