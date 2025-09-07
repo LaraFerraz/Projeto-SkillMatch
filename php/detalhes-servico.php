@@ -1,5 +1,4 @@
 <?php
-// Simula a busca de dados de um fornecedor
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 $fornecedor = [
     1 => [
@@ -64,8 +63,6 @@ $fornecedor = [
 $fornecedor_atual = $fornecedor[$id] ?? $fornecedor[1];
 $avaliacao_int = floor($fornecedor_atual['avaliacao']);
 $has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
-
-// Extrai apenas os dígitos do telefone para o link do WhatsApp
 $telefone_whatsapp = preg_replace('/[^0-9]/', '', $fornecedor_atual['contato']['telefone']);
 $mensagem_whatsapp = "Olá, vim pelo site SkillMatch e gostaria de mais informações sobre seus serviços.";
 $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode($mensagem_whatsapp);
@@ -107,7 +104,6 @@ $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode(
                     <h4 class="fw-bold mb-3">Sobre o Profissional</h4>
                     <p><?php echo $fornecedor_atual['bio']; ?></p>
                 </div>
-
                 <div class="details-section mb-4">
                     <h4 class="fw-bold mb-3">Serviços Oferecidos</h4>
                     <ul class="list-unstyled service-list">
@@ -116,12 +112,10 @@ $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode(
                         <?php endforeach; ?>
                     </ul>
                 </div>
-
                 <div class="details-section mb-4">
                     <h4 class="fw-bold mb-3">Horário de Trabalho</h4>
                     <p><i class="fas fa-clock me-2 text-primary"></i> <?php echo $fornecedor_atual['horario']; ?></p>
                 </div>
-
                 <div class="details-section review-form-section">
                     <h4 class="fw-bold mb-3">Deixe sua Avaliação</h4>
                     <form>

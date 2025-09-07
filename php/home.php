@@ -5,8 +5,7 @@
                 <h1 class="display-3 fw-bold mb-3">Encontre o profissional <span class="text-secondary-highlight">certo</span> em minutos</h1>
                 <p class="lead mb-4">Conecte-se com prestadores de serviços verificados e qualificados. Resolva suas necessidades com rapidez e segurança.</p>
                 <div class="d-flex justify-content-center justify-content-md-start">
-                    <button class="btn btn-dark-blue me-3">Começar Agora <i class="fa-solid fa-arrow-right"></i></button>
-                    <a href="#como-funciona" class="btn btn-outline-white-border">Ver Como Funciona</a>
+                    <a href="index.php?page=servicos" class="btn btn-outline-white-border">Começar agora</a>
                 </div>
             </div>
             <div class="col-md-5 d-none d-md-block">
@@ -200,7 +199,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-             <a href="index.php?page=cadastro" class="btn btn-secondary-blue me-3">Cadastre-se</a>
+             <a href="index.php?page=cad" class="btn btn-secondary-blue me-3">Cadastre-se</a>
             <a href="index.php?page=sobre" class="btn btn-secondary-blue me-3">Saiba Mais</a>
     </div>
 </section>
