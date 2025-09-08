@@ -21,6 +21,10 @@
                                 <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
                             </div>
                             <div class="col-12">
+                                <label for="cpf" class="form-label fw-bold">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                            </div>
+                            <div class="col-12">
                                 <label for="foto" class="form-label fw-bold">Foto de Perfil</label>
                                 <input class="form-control" type="file" id="foto" name="foto" accept="image/*">
                                 <div class="form-text">Envie uma foto profissional para atrair mais clientes.</div>
@@ -251,6 +255,14 @@
                                 <label for="confirmar_senha" class="form-label fw-bold">Confirme sua Senha</label>
                                 <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
                             </div>
+
+                            <div class="col-12 mt-4">
+                                <div class="alert alert-info" role="alert">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Seu perfil será publicado após a verificação e aprovação pela nossa equipe.
+                                </div>
+                            </div>
+                            
                             <div class="col-12 d-grid mt-4">
                                 <button type="submit" class="btn btn-dark-blue btn-lg">Cadastrar como Fornecedor</button>
                             </div>

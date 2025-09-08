@@ -72,6 +72,9 @@ $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode(
     <div class="container">
         <div class="row d-flex align-items-start">
             <div class="col-md-4 text-center">
+                <br>
+                <br>
+                <br>
                 <img src="<?php echo $fornecedor_atual['foto']; ?>" class="profile-img mb-3 mx-auto" alt="Foto de Perfil">
                 <h3 class="fw-bold mb-1"><?php echo $fornecedor_atual['nome']; ?></h3>
                 <p class="text-muted"><?php echo $fornecedor_atual['servico']; ?></p>
