@@ -1,127 +1,137 @@
 <?php
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-$fornecedor = [
-    1 => [
-        'nome' => 'João da Silva',
-        'servico' => 'Eletricista Residencial',
-        'localidade' => 'São Paulo, SP',
-        'foto' => 'https://via.placeholder.com/400x400.png?text=Joao+da+Silva',
-        'avaliacao' => 4.5,
-        'bio' => 'Eletricista com mais de 10 anos de experiência em instalações, reparos e manutenção. Trabalho com segurança e garantia. Atendo a região metropolitana de São Paulo. Entre em contato para um orçamento gratuito!',
-        'contato' => [
-            'telefone' => '(11) 98765-4321',
-            'email' => 'joao.eletricista@email.com'
-        ],
-        'horario' => 'Segunda a Sexta, das 8h às 18h',
-        'servicos_oferecidos' => [
-            'Instalação de tomadas e interruptores',
-            'Manutenção elétrica preventiva',
-            'Troca de fiação',
-            'Instalação de luminárias e ventiladores'
-        ]
-    ],
-    2 => [
-        'nome' => 'Maria Rodrigues',
-        'servico' => 'Design Gráfico',
-        'localidade' => 'Rio de Janeiro, RJ',
-        'foto' => 'https://via.placeholder.com/400x400.png?text=Maria+Rodrigues',
-        'avaliacao' => 5.0,
-        'bio' => 'Designer gráfica criativa e dedicada, com foco em identidade visual e design de materiais para redes sociais. Meu objetivo é transformar sua marca em uma experiência visual inesquecível. Vamos criar algo incrível juntos?',
-        'contato' => [
-            'telefone' => '(21) 99876-5432',
-            'email' => 'maria.designer@email.com'
-        ],
-        'horario' => 'Segunda a Sábado, das 9h às 19h',
-        'servicos_oferecidos' => [
-            'Criação de logotipos e identidade visual',
-            'Design para mídias sociais',
-            'Elaboração de catálogos e flyers',
-            'Edição de imagens'
-        ]
-    ],
-    3 => [
-        'nome' => 'Carlos Pimentel',
-        'servico' => 'Desenvolvedor Web',
-        'localidade' => 'Belo Horizonte, MG',
-        'foto' => 'https://via.placeholder.com/400x400.png?text=Carlos+Pimentel',
-        'avaliacao' => 3.0,
-        'bio' => 'Desenvolvedor focado em back-end, mas com conhecimento em front-end. Ajudo a construir sites e aplicações web robustas e funcionais. Entre em contato para discutirmos seu projeto.',
-        'contato' => [
-            'telefone' => '(31) 97654-3210',
-            'email' => 'carlos.dev@email.com'
-        ],
-        'horario' => 'Segunda a Sexta, das 9h às 17h',
-        'servicos_oferecidos' => [
-            'Desenvolvimento de sites institucionais',
-            'Criação de e-commerce',
-            'Manutenção de sistemas web',
-            'Integração com APIs'
-        ]
-    ]
-];
+// Inclui o arquivo de conexão
+require_once 'db_config.php';
 
-$fornecedor_atual = $fornecedor[$id] ?? $fornecedor[1];
-$avaliacao_int = floor($fornecedor_atual['avaliacao']);
-$has_half_star = ($fornecedor_atual['avaliacao'] - $avaliacao_int) > 0;
-$telefone_whatsapp = preg_replace('/[^0-9]/', '', $fornecedor_atual['contato']['telefone']);
-$mensagem_whatsapp = "Olá, vim pelo site SkillMatch e gostaria de mais informações sobre seus serviços.";
-$link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode($mensagem_whatsapp);
+// Pega o ID do serviço da URL
+$servico_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($servico_id == 0) {
+    echo "<p class='text-center mt-5'>Serviço não encontrado.</p>";
+    exit();
+}
+
+// Lógica para salvar nova avaliação
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_avaliacao'])) {
+    $nota = $_POST['rating'];
+    $comentario = $_POST['comment'];
+    $nome_cliente = $_POST['client_name'];
+
+    // Prepara e executa a instrução SQL
+    $stmt_insert = $conn->prepare("INSERT INTO avaliacoes (servico_id, nome_cliente, nota, comentario) VALUES (?, ?, ?, ?)");
+    $stmt_insert->bind_param("isis", $servico_id, $nome_cliente, $nota, $comentario);
+    
+    if ($stmt_insert->execute()) {
+        echo "<script>alert('Avaliação enviada com sucesso!');</script>";
+    } else {
+        echo "<script>alert('Erro ao enviar avaliação: " . $conn->error . "');</script>";
+    }
+    $stmt_insert->close();
+}
+
+// Busca os detalhes do serviço e do prestador
+$stmt = $conn->prepare("SELECT s.*, p.nome AS prestador_nome, p.bio, p.telefone, p.email, p.localidade, p.horario, p.foto_perfil, p.tipo_servico, p.categoria1, p.categoria2, p.categoria3
+                        FROM servicos s
+                        INNER JOIN prestadores p ON s.prestador_id = p.id
+                        WHERE s.id = ?");
+$stmt->bind_param("i", $servico_id);
+$stmt->execute();
+$servico_detalhes = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+// Se o serviço não for encontrado, exibe uma mensagem e encerra
+if (!$servico_detalhes) {
+    echo "<p class='text-center mt-5'>Serviço não encontrado.</p>";
+    exit();
+}
+
+// Busca as avaliações do serviço
+$stmt_avaliacoes = $conn->prepare("SELECT nome_cliente, nota, comentario FROM avaliacoes WHERE servico_id = ?");
+$stmt_avaliacoes->bind_param("i", $servico_id);
+$stmt_avaliacoes->execute();
+$avaliacoes = $stmt_avaliacoes->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt_avaliacoes->close();
+
 ?>
 
-<section class="provider-details-page py-5 content-top-padding">
+<section class="service-details-page py-5 content-top-padding">
     <div class="container">
-        <div class="row d-flex align-items-start">
-            <div class="col-md-4 text-center">
-                <br>
-                <br>
-                <br>
-                <img src="<?php echo $fornecedor_atual['foto']; ?>" class="profile-img mb-3 mx-auto" alt="Foto de Perfil">
-                <h3 class="fw-bold mb-1"><?php echo $fornecedor_atual['nome']; ?></h3>
-                <p class="text-muted"><?php echo $fornecedor_atual['servico']; ?></p>
-                <div class="rating mb-3">
-                    <?php
-                    for ($i = 0; $i < 5; $i++) {
-                        if ($i < $avaliacao_int) {
-                            echo '<i class="fas fa-star text-warning"></i>';
-                        } else if ($has_half_star && $i == $avaliacao_int) {
-                            echo '<i class="fas fa-star-half-alt text-warning"></i>';
-                        } else {
-                            echo '<i class="far fa-star text-warning"></i>';
-                        }
-                    }
-                    ?>
-                    <span class="ms-2 text-muted">(<?php echo number_format($fornecedor_atual['avaliacao'], 1); ?>)</span>
-                </div>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone-alt me-2 text-primary"></i> <?php echo $fornecedor_atual['contato']['telefone']; ?></p>
-                    <p><i class="fas fa-envelope me-2 text-primary"></i> <?php echo $fornecedor_atual['contato']['email']; ?></p>
-                </div>
-                <div class="d-grid gap-2 mt-4">
-                    <a href="<?php echo $link_whatsapp; ?>" class="btn btn-success fw-bold" target="_blank">
-                        <i class="fab fa-whatsapp me-2"></i> Contato via WhatsApp
-                    </a>
+        <br>
+        <br>
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="details-card p-4">
+                    <div class="service-header mb-4 d-flex align-items-center">
+                        <img src="<?php echo htmlspecialchars($servico_detalhes['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" alt="Foto do Prestador" class="rounded-circle me-3 service-provider-img">
+                        <div>
+                            <h2 class="fw-bold mb-0"><?php echo htmlspecialchars($servico_detalhes['prestador_nome']); ?></h2>
+                            <p class="service-type lead text-muted"><?php echo htmlspecialchars($servico_detalhes['tipo_servico']); ?></p>
+                            <p class="service-location"><i class="fas fa-map-marker-alt text-primary me-1"></i> <?php echo htmlspecialchars($servico_detalhes['localidade']); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="details-section mb-4">
+                        <h4 class="fw-bold mb-3">Sobre o Serviço</h4>
+                        <p><?php echo htmlspecialchars($servico_detalhes['descricao']); ?></p>
+                    </div>
+
+                    <div class="details-section mb-4">
+                        <h4 class="fw-bold mb-3">Serviços Oferecidos</h4>
+                        <ul class="list-unstyled">
+                            <?php 
+                            $categorias = [$servico_detalhes['categoria1'], $servico_detalhes['categoria2'], $servico_detalhes['categoria3']];
+                            foreach ($categorias as $categoria):
+                                if (!empty($categoria)): ?>
+                                    <li class="d-flex align-items-center mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> <?php echo htmlspecialchars($categoria); ?></li>
+                                <?php endif;
+                            endforeach; ?>
+                        </ul>
+                    </div>
+
+                    <div class="details-section mb-4">
+                        <h4 class="fw-bold mb-3">Avaliações de Clientes</h4>
+                        <?php if (count($avaliacoes) > 0): ?>
+                            <?php foreach ($avaliacoes as $avaliacao): ?>
+                                <div class="review-item mb-3 p-3 border rounded">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="mb-0 fw-bold"><?php echo htmlspecialchars($avaliacao['nome_cliente']); ?></h6>
+                                        <div class="rating-stars">
+                                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                <?php if ($i <= $avaliacao['nota']): ?>
+                                                    <i class="fas fa-star text-warning"></i>
+                                                <?php else: ?>
+                                                    <i class="far fa-star text-warning"></i>
+                                                <?php endif; ?>
+                                            <?php endfor; ?>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0"><?php echo htmlspecialchars($avaliacao['comentario']); ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p class="text-muted">Nenhuma avaliação ainda. Seja o primeiro a avaliar!</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="details-section mb-4">
-                    <h4 class="fw-bold mb-3">Sobre o Profissional</h4>
-                    <p><?php echo $fornecedor_atual['bio']; ?></p>
-                </div>
-                <div class="details-section mb-4">
-                    <h4 class="fw-bold mb-3">Serviços Oferecidos</h4>
-                    <ul class="list-unstyled service-list">
-                        <?php foreach ($fornecedor_atual['servicos_oferecidos'] as $servico) : ?>
-                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i> <?php echo $servico; ?></li>
-                        <?php endforeach; ?>
+
+            <div class="col-md-4">
+                <div class="details-card p-4">
+                    <h4 class="fw-bold mb-3">Detalhes de Contato</h4>
+                    <ul class="list-unstyled contact-list">
+                        <li><i class="fas fa-phone-alt me-2 text-primary"></i> <?php echo htmlspecialchars($servico_detalhes['telefone']); ?></li>
+                        <li><i class="fas fa-envelope me-2 text-primary"></i> <?php echo htmlspecialchars($servico_detalhes['email']); ?></li>
+                        <li><i class="fas fa-clock me-2 text-primary"></i> <?php echo htmlspecialchars($servico_detalhes['horario']); ?></li>
                     </ul>
                 </div>
-                <div class="details-section mb-4">
-                    <h4 class="fw-bold mb-3">Horário de Trabalho</h4>
-                    <p><i class="fas fa-clock me-2 text-primary"></i> <?php echo $fornecedor_atual['horario']; ?></p>
-                </div>
-                <div class="details-section review-form-section">
+                
+                <div class="details-card p-4 mt-4">
                     <h4 class="fw-bold mb-3">Deixe sua Avaliação</h4>
-                    <form>
+                    <form action="index.php?page=detalhes-servico&id=<?php echo htmlspecialchars($servico_id); ?>" method="POST">
+                        <input type="hidden" name="submit_avaliacao" value="1">
+                        <div class="mb-3">
+                            <label for="client_name" class="form-label">Seu Nome</label>
+                            <input type="text" class="form-control" id="client_name" name="client_name" required>
+                        </div>
                         <div class="mb-3">
                             <label for="rating" class="form-label">Sua Avaliação (1 a 5 estrelas)</label>
                             <div class="star-rating">
@@ -130,7 +140,12 @@ $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode(
                                 <i class="far fa-star text-warning" data-rating="3"></i>
                                 <i class="far fa-star text-warning" data-rating="4"></i>
                                 <i class="far fa-star text-warning" data-rating="5"></i>
+                                <input type="hidden" name="rating" id="rating-input" required>
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comentário</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
                     </form>
@@ -139,3 +154,29 @@ $link_whatsapp = "https://wa.me/55" . $telefone_whatsapp . "?text=" . urlencode(
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const starRatingContainer = document.querySelector('.star-rating');
+    if (starRatingContainer) {
+        const stars = starRatingContainer.querySelectorAll('i');
+        const ratingInput = document.getElementById('rating-input');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                stars.forEach(s => {
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+    }
+});
+</script>

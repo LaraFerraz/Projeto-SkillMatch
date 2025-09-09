@@ -1,3 +1,35 @@
+<?php
+// Inclui o arquivo de conexão com o banco de dados
+require_once 'db_config.php';
+
+// SQL para buscar os serviços, os dados dos prestadores e a média de avaliação
+$sql = "SELECT 
+            s.id,
+            s.titulo,
+            s.descricao,
+            s.preco,
+            p.nome AS prestador_nome,
+            p.localidade,
+            p.foto_perfil,
+            AVG(a.nota) as media_avaliacao,
+            COUNT(a.id) as total_avaliacoes
+        FROM servicos s
+        INNER JOIN prestadores p ON s.prestador_id = p.id
+        LEFT JOIN avaliacoes a ON s.id = a.servico_id
+        WHERE p.status = 'aprovado'
+        GROUP BY s.id
+        ORDER BY s.id DESC";
+
+$result = $conn->query($sql);
+
+$servicos = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $servicos[] = $row;
+    }
+}
+?>
+
 <section class="services-page py-5">
     <div class="container">
         <br>
@@ -17,67 +49,32 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
+            <?php foreach ($servicos as $servico): ?>
             <div class="col">
                 <div class="service-card h-100">
-                    <img src="https://via.placeholder.com/150x150.png?text=Fornecedor+1" class="service-img" alt="Foto Fornecedor">
+                    <img src="<?php echo htmlspecialchars($servico['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" class="service-img" alt="Foto Fornecedor">
                     <div class="service-info">
-                        <h5 class="fw-bold mb-1">João da Silva</h5>
-                        <p class="service-type">Eletricista Residencial</p>
+                        <h5 class="fw-bold mb-1"><?php echo htmlspecialchars($servico['prestador_nome']); ?></h5>
+                        <p class="service-type"><?php echo htmlspecialchars($servico['titulo']); ?></p>
                         <div class="rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star-half-alt text-warning"></i>
-                            <span class="ms-2 text-muted">(4.5)</span>
+                            <?php
+                            $rating = round($servico['media_avaliacao'] ?? 0);
+                            for ($i = 1; $i <= 5; $i++):
+                                if ($i <= $rating): ?>
+                                    <i class="fas fa-star text-warning"></i>
+                                <?php else: ?>
+                                    <i class="far fa-star text-warning"></i>
+                                <?php endif;
+                            endfor;
+                            ?>
+                            <span class="ms-2 text-muted">(<?php echo number_format($servico['media_avaliacao'] ?? 0, 1); ?>)</span>
                         </div>
-                        <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> São Paulo, SP</p>
-                        <a href="index.php?page=detalhes-servico&id=1" class="btn btn-dark-blue w-100">Ver Mais</a>
+                        <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($servico['localidade']); ?></p>
+                        <a href="index.php?page=detalhes-servico&id=<?php echo htmlspecialchars($servico['id']); ?>" class="btn btn-dark-blue w-100">Ver Mais</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col">
-                <div class="service-card h-100">
-                    <img src="https://via.placeholder.com/150x150.png?text=Fornecedor+2" class="service-img" alt="Foto Fornecedor">
-                    <div class="service-info">
-                        <h5 class="fw-bold mb-1">Maria Rodrigues</h5>
-                        <p class="service-type">Design Gráfico</p>
-                        <div class="rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <span class="ms-2 text-muted">(5.0)</span>
-                        </div>
-                        <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> Rio de Janeiro, RJ</p>
-                        <a href="index.php?page=detalhes-servico&id=2" class="btn btn-dark-blue w-100">Ver Mais</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="service-card h-100">
-                    <img src="https://via.placeholder.com/150x150.png?text=Fornecedor+3" class="service-img" alt="Foto Fornecedor">
-                    <div class="service-info">
-                        <h5 class="fw-bold mb-1">Carlos Pimentel</h5>
-                        <p class="service-type">Desenvolvedor Web</p>
-                        <div class="rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="far fa-star text-warning"></i>
-                            <i class="far fa-star text-warning"></i>
-                            <span class="ms-2 text-muted">(3.0)</span>
-                        </div>
-                        <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> Belo Horizonte, MG</p>
-                        <a href="index.php?page=detalhes-servico&id=3" class="btn btn-dark-blue w-100">Ver Mais</a>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
