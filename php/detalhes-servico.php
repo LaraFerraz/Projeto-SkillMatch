@@ -1,3 +1,39 @@
+<?php
+require_once "config.php";
+
+$servico_id = $_GET['id'];
+$db = new Database();
+$conn = $db->getConnection();
+
+// Buscar detalhes do prestador
+$stmt = $conn->prepare("SELECT * FROM prestadores WHERE id=:id");
+$stmt->execute([':id'=>$servico_id]);
+$servico_detalhes = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Buscar avaliações
+$stmt = $conn->prepare("SELECT * FROM avaliacoes WHERE prestador_id=:id");
+$stmt->execute([':id'=>$servico_id]);
+$avaliacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Inserir nova avaliação
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_avaliacao'])) {
+    $nome_cliente = $_POST['client_name'];
+    $nota = (int)$_POST['rating'];
+    $comentario = $_POST['comment'];
+
+    $stmt = $conn->prepare("INSERT INTO avaliacoes (prestador_id,nome_cliente,nota,comentario) 
+        VALUES (:prestador_id,:nome_cliente,:nota,:comentario)");
+    $stmt->execute([
+        ':prestador_id'=>$servico_id,
+        ':nome_cliente'=>$nome_cliente,
+        ':nota'=>$nota,
+        ':comentario'=>$comentario
+    ]);
+
+    header("Location: detalhes-servico.php?id=".$servico_id);
+    exit;
+}
+?>
 
 <section class="service-details-page py-5 content-top-padding">
     <div class="container">
