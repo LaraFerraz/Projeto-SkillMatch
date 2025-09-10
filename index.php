@@ -43,13 +43,11 @@
 <main>
     <?php
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-    // O caminho deve ser relativo à raiz do seu projeto
     $filePath = 'php/' . $page . '.php';
 
     if (file_exists($filePath)) {
         include $filePath;
     } else {
-        // Se a página não existir, volta para a home
         include 'php/home.php';
     }
     ?>
@@ -65,7 +63,7 @@
                     <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-md-3 mb-4">

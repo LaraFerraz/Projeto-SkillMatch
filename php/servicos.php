@@ -1,34 +1,3 @@
-<?php
-// Inclui o arquivo de conexão com o banco de dados
-require_once 'db_config.php';
-
-// SQL para buscar os serviços, os dados dos prestadores e a média de avaliação
-$sql = "SELECT 
-            s.id,
-            s.titulo,
-            s.descricao,
-            s.preco,
-            p.nome AS prestador_nome,
-            p.localidade,
-            p.foto_perfil,
-            AVG(a.nota) as media_avaliacao,
-            COUNT(a.id) as total_avaliacoes
-        FROM servicos s
-        INNER JOIN prestadores p ON s.prestador_id = p.id
-        LEFT JOIN avaliacoes a ON s.id = a.servico_id
-        WHERE p.status = 'aprovado'
-        GROUP BY s.id
-        ORDER BY s.id DESC";
-
-$result = $conn->query($sql);
-
-$servicos = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $servicos[] = $row;
-    }
-}
-?>
 
 <section class="services-page py-5">
     <div class="container">
