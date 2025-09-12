@@ -1,3 +1,13 @@
+<?php
+// Inclui o arquivo de configuração (ajuste o caminho conforme a estrutura)
+require_once __DIR__ . '/../config.php';
+
+// Buscar todos os serviços junto com a média das avaliações
+$stmt = $pdo->query("SELECT p.*, 
+                            (SELECT AVG(nota) FROM avaliacoes a WHERE a.id_prestador = p.id) AS media_avaliacao
+                     FROM prestadores p");
+$servicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <section class="services-page py-5">
     <div class="container">
@@ -18,32 +28,36 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <?php foreach ($servicos as $servico): ?>
-            <div class="col">
-                <div class="service-card h-100">
-                    <img src="<?php echo htmlspecialchars($servico['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" class="service-img" alt="Foto Fornecedor">
-                    <div class="service-info">
-                        <h5 class="fw-bold mb-1"><?php echo htmlspecialchars($servico['prestador_nome']); ?></h5>
-                        <p class="service-type"><?php echo htmlspecialchars($servico['titulo']); ?></p>
-                        <div class="rating mb-2">
-                            <?php
-                            $rating = round($servico['media_avaliacao'] ?? 0);
-                            for ($i = 1; $i <= 5; $i++):
-                                if ($i <= $rating): ?>
-                                    <i class="fas fa-star text-warning"></i>
-                                <?php else: ?>
-                                    <i class="far fa-star text-warning"></i>
-                                <?php endif;
-                            endfor;
-                            ?>
-                            <span class="ms-2 text-muted">(<?php echo number_format($servico['media_avaliacao'] ?? 0, 1); ?>)</span>
+            <?php if (!empty($servicos)): ?>
+                <?php foreach ($servicos as $servico): ?>
+                <div class="col">
+                    <div class="service-card h-100">
+                        <img src="<?php echo htmlspecialchars($servico['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" class="service-img" alt="Foto Fornecedor">
+                        <div class="service-info">
+                            <h5 class="fw-bold mb-1"><?php echo htmlspecialchars($servico['prestador_nome']); ?></h5>
+                            <p class="service-type"><?php echo htmlspecialchars($servico['titulo']); ?></p>
+                            <div class="rating mb-2">
+                                <?php
+                                $rating = round($servico['media_avaliacao'] ?? 0);
+                                for ($i = 1; $i <= 5; $i++):
+                                    if ($i <= $rating): ?>
+                                        <i class="fas fa-star text-warning"></i>
+                                    <?php else: ?>
+                                        <i class="far fa-star text-warning"></i>
+                                    <?php endif;
+                                endfor;
+                                ?>
+                                <span class="ms-2 text-muted">(<?php echo number_format($servico['media_avaliacao'] ?? 0, 1); ?>)</span>
+                            </div>
+                            <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($servico['localidade']); ?></p>
+                            <a href="index.php?page=detalhes-servico&id=<?php echo htmlspecialchars($servico['id']); ?>" class="btn btn-dark-blue w-100">Ver Mais</a>
                         </div>
-                        <p class="service-location mb-3"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($servico['localidade']); ?></p>
-                        <a href="index.php?page=detalhes-servico&id=<?php echo htmlspecialchars($servico['id']); ?>" class="btn btn-dark-blue w-100">Ver Mais</a>
                     </div>
                 </div>
-            </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-center">Nenhum serviço disponível no momento.</p>
+            <?php endif; ?>
         </div>
     </div>
 </section>

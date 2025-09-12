@@ -1,39 +1,4 @@
-<?php
-require_once "config.php";
 
-$servico_id = $_GET['id'];
-$db = new Database();
-$conn = $db->getConnection();
-
-// Buscar detalhes do prestador
-$stmt = $conn->prepare("SELECT * FROM prestadores WHERE id=:id");
-$stmt->execute([':id'=>$servico_id]);
-$servico_detalhes = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// Buscar avaliações
-$stmt = $conn->prepare("SELECT * FROM avaliacoes WHERE prestador_id=:id");
-$stmt->execute([':id'=>$servico_id]);
-$avaliacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Inserir nova avaliação
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_avaliacao'])) {
-    $nome_cliente = $_POST['client_name'];
-    $nota = (int)$_POST['rating'];
-    $comentario = $_POST['comment'];
-
-    $stmt = $conn->prepare("INSERT INTO avaliacoes (prestador_id,nome_cliente,nota,comentario) 
-        VALUES (:prestador_id,:nome_cliente,:nota,:comentario)");
-    $stmt->execute([
-        ':prestador_id'=>$servico_id,
-        ':nome_cliente'=>$nome_cliente,
-        ':nota'=>$nota,
-        ':comentario'=>$comentario
-    ]);
-
-    header("Location: detalhes-servico.php?id=".$servico_id);
-    exit;
-}
-?>
 
 <section class="service-details-page py-5 content-top-padding">
     <div class="container">
@@ -107,35 +72,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_avaliacao'])) 
                 </div>
                 
                 <div class="details-card p-4 mt-4">
-                    <h4 class="fw-bold mb-3">Deixe sua Avaliação</h4>
-                    <form action="index.php?page=detalhes-servico&id=<?php echo htmlspecialchars($servico_id); ?>" method="POST">
-                        <input type="hidden" name="submit_avaliacao" value="1">
-                        <div class="mb-3">
-                            <label for="client_name" class="form-label">Seu Nome</label>
-                            <input type="text" class="form-control" id="client_name" name="client_name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="rating" class="form-label">Sua Avaliação (1 a 5 estrelas)</label>
-                            <div class="star-rating">
-                                <i class="far fa-star text-warning" data-rating="1"></i>
-                                <i class="far fa-star text-warning" data-rating="2"></i>
-                                <i class="far fa-star text-warning" data-rating="3"></i>
-                                <i class="far fa-star text-warning" data-rating="4"></i>
-                                <i class="far fa-star text-warning" data-rating="5"></i>
-                                <input type="hidden" name="rating" id="rating-input" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="comment" class="form-label">Comentário</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
-                    </form>
-                </div>
+    <h4 class="fw-bold mb-3">Deixe sua Avaliação</h4>
+    <form action="index.php?page=avaliacao=<?php echo htmlspecialchars($servico_id); ?>" method="POST">
+        <input type="hidden" name="submit_avaliacao" value="1">
+        <input type="hidden" name="id_prestador" value="<?php echo htmlspecialchars($servico_id); ?>">
+
+        <div class="mb-3">
+            <label for="rating" class="form-label">Sua Avaliação (1 a 5 estrelas)</label>
+            <div class="star-rating">
+                <i class="far fa-star text-warning" data-rating="1"></i>
+                <i class="far fa-star text-warning" data-rating="2"></i>
+                <i class="far fa-star text-warning" data-rating="3"></i>
+                <i class="far fa-star text-warning" data-rating="4"></i>
+                <i class="far fa-star text-warning" data-rating="5"></i>
+                <input type="hidden" name="rating" id="rating-input" required>
             </div>
         </div>
-    </div>
-</section>
+
+        <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
+    </form>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,4 +1,33 @@
+<?php
+session_start();
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../classes/Prestador.php';
 
+$erro = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $senha = $_POST['senha'] ?? '';
+
+    $prestadorObj = new Prestador($pdo);
+
+    // Buscar prestador pelo email
+    $stmt = $pdo->prepare("SELECT * FROM prestadores WHERE email = :email");
+    $stmt->execute([':email' => $email]);
+    $prestador = $stmt->fetch();
+
+    if ($prestador && password_verify($senha, $prestador['senha'])) {
+        // Login correto → salvar id na sessão
+        $_SESSION['prestador_id'] = $prestador['id'];
+
+        // Redirecionar para perfil
+        header('Location: ../index.php?page=perfil');
+        exit;
+    } else {
+        $erro = "Email ou senha incorretos!";
+    }
+}
+?>
 <section class="login-page py-5 content-top-padding">
     <div class="container">
         <div class="row justify-content-center">

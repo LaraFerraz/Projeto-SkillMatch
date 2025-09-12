@@ -1,46 +1,32 @@
 <?php
-require_once "config.php";
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../classes/Prestador.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = new Database();
-    $conn = $db->getConnection();
+    $prestadorObj = new Prestador($pdo);
 
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $cpf = $_POST['cpf'];
-    $tipo_servico = $_POST['servico'];
-    $categoria1 = $_POST['categoria1'];
-    $categoria2 = $_POST['categoria2'] ?? null;
-    $categoria3 = $_POST['categoria3'] ?? null;
-    $localidade = $_POST['localidade'];
-    $descricao = $_POST['descricao'];
-    $horario = $_POST['horario'];
-    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+    $dados = [
+        'nome' => $_POST['nome'],
+        'email' => $_POST['email'],
+        'senha' => $_POST['senha'],
+        'telefone' => $_POST['telefone'],
+        'localidade' => $_POST['localidade'],
+        'descricao' => $_POST['descricao'],
+        'cpf' => $_POST['cpf'],
+        'foto_perfil' => $_POST['foto'],
+        'categoria1' => $_POST['categoria1'],
+        'categoria2' => $_POST['categoria2'],
+        'categoria3' => $_POST['categoria3'],
+        'horario' => $_POST['horario']
+    ];
 
-    // Upload da foto
-    $foto_perfil = null;
-    if (!empty($_FILES['foto']['name'])) {
-        $foto_nome = time() . "_" . $_FILES['foto']['name'];
-        move_uploaded_file($_FILES['foto']['tmp_name'], "uploads/" . $foto_nome);
-        $foto_perfil = "uploads/" . $foto_nome;
-    }
+    $prestadorObj->cadastrar($dados);
 
-    $stmt = $conn->prepare("INSERT INTO prestadores 
-        (nome,email,telefone,cpf,foto_perfil,tipo_servico,categoria1,categoria2,categoria3,localidade,descricao,horario,senha)
-        VALUES (:nome,:email,:telefone,:cpf,:foto_perfil,:tipo_servico,:categoria1,:categoria2,:categoria3,:localidade,:descricao,:horario,:senha)");
-    
-    $stmt->execute([
-        ':nome'=>$nome, ':email'=>$email, ':telefone'=>$telefone, ':cpf'=>$cpf,
-        ':foto_perfil'=>$foto_perfil, ':tipo_servico'=>$tipo_servico, 
-        ':categoria1'=>$categoria1, ':categoria2'=>$categoria2, ':categoria3'=>$categoria3,
-        ':localidade'=>$localidade, ':descricao'=>$descricao, ':horario'=>$horario,
-        ':senha'=>$senha
-    ]);
-
-    echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='login.php';</script>";
+    header('Location: ../index.php?page=login');
+    exit;
 }
 ?>
+
 
 <section class="cadastro-page py-5 content-top-padding">
     <div class="container">
