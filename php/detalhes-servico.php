@@ -1,30 +1,71 @@
+<?php
+require_once __DIR__ . '/../config.php';
 
+// Pegar ID do prestador e validar
+$servico_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+if ($servico_id <= 0) {
+    echo "Prestador inválido.";
+    exit;
+}
+
+// Buscar detalhes do prestador
+try {
+    $stmt = $pdo->prepare("SELECT * FROM prestadores WHERE id = :id");
+    $stmt->execute([':id' => $servico_id]);
+    $servico_detalhes = $stmt->fetch();
+
+    if (!$servico_detalhes) {
+        echo "Prestador não encontrado.";
+        exit;
+    }
+} catch (PDOException $e) {
+    echo "Erro ao buscar prestador: " . $e->getMessage();
+    exit;
+}
+
+// Buscar avaliações (opcional)
+try {
+    $stmt2 = $pdo->prepare("SELECT * FROM avaliacoes WHERE id_prestador = :id");
+    $stmt2->execute([':id' => $servico_id]);
+    $avaliacoes = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Se tabela ainda não existir ou estiver vazia, usar array vazio
+    $avaliacoes = [];
+}
+?>
 
 <section class="service-details-page py-5 content-top-padding">
     <div class="container">
-        <br>
-        <br>
+        <br><br>
         <div class="row g-4">
+            <!-- Coluna principal -->
             <div class="col-md-8">
                 <div class="details-card p-4">
                     <div class="service-header mb-4 d-flex align-items-center">
-                        <img src="<?php echo htmlspecialchars($servico_detalhes['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" alt="Foto do Prestador" class="rounded-circle me-3 service-provider-img">
+                       <img src="uploads/<?php echo htmlspecialchars($servico_detalhes['foto_perfil'] ?? 'placeholder.png'); ?>" 
+                        alt="Foto do Prestador" 
+                        class="rounded-circle" 
+                        style="width: 150px; height: 150px; object-fit: cover;">
+                        
+                        
                         <div>
-                            <h2 class="fw-bold mb-0"><?php echo htmlspecialchars($servico_detalhes['prestador_nome']); ?></h2>
+                            <h2 class="fw-bold mb-0"><?php echo htmlspecialchars($servico_detalhes['nome']); ?></h2>
                             <p class="service-type lead text-muted"><?php echo htmlspecialchars($servico_detalhes['tipo_servico']); ?></p>
                             <p class="service-location"><i class="fas fa-map-marker-alt text-primary me-1"></i> <?php echo htmlspecialchars($servico_detalhes['localidade']); ?></p>
                         </div>
                     </div>
 
+                    <!-- Sobre o serviço -->
                     <div class="details-section mb-4">
                         <h4 class="fw-bold mb-3">Sobre o Serviço</h4>
                         <p><?php echo htmlspecialchars($servico_detalhes['descricao']); ?></p>
                     </div>
 
+                    <!-- Serviços/Categorias -->
                     <div class="details-section mb-4">
                         <h4 class="fw-bold mb-3">Serviços Oferecidos</h4>
                         <ul class="list-unstyled">
-                            <?php 
+                            <?php
                             $categorias = [$servico_detalhes['categoria1'], $servico_detalhes['categoria2'], $servico_detalhes['categoria3']];
                             foreach ($categorias as $categoria):
                                 if (!empty($categoria)): ?>
@@ -34,9 +75,10 @@
                         </ul>
                     </div>
 
+                    <!-- Avaliações -->
                     <div class="details-section mb-4">
                         <h4 class="fw-bold mb-3">Avaliações de Clientes</h4>
-                        <?php if (count($avaliacoes) > 0): ?>
+                        <?php if (!empty($avaliacoes)): ?>
                             <?php foreach ($avaliacoes as $avaliacao): ?>
                                 <div class="review-item mb-3 p-3 border rounded">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
@@ -61,7 +103,9 @@
                 </div>
             </div>
 
+            <!-- Coluna lateral -->
             <div class="col-md-4">
+                <!-- Contato -->
                 <div class="details-card p-4">
                     <h4 class="fw-bold mb-3">Detalhes de Contato</h4>
                     <ul class="list-unstyled contact-list">
@@ -70,51 +114,5 @@
                         <li><i class="fas fa-clock me-2 text-primary"></i> <?php echo htmlspecialchars($servico_detalhes['horario']); ?></li>
                     </ul>
                 </div>
-                
-                <div class="details-card p-4 mt-4">
-    <h4 class="fw-bold mb-3">Deixe sua Avaliação</h4>
-    <form action="index.php?page=avaliacao=<?php echo htmlspecialchars($servico_id); ?>" method="POST">
-        <input type="hidden" name="submit_avaliacao" value="1">
-        <input type="hidden" name="id_prestador" value="<?php echo htmlspecialchars($servico_id); ?>">
 
-        <div class="mb-3">
-            <label for="rating" class="form-label">Sua Avaliação (1 a 5 estrelas)</label>
-            <div class="star-rating">
-                <i class="far fa-star text-warning" data-rating="1"></i>
-                <i class="far fa-star text-warning" data-rating="2"></i>
-                <i class="far fa-star text-warning" data-rating="3"></i>
-                <i class="far fa-star text-warning" data-rating="4"></i>
-                <i class="far fa-star text-warning" data-rating="5"></i>
-                <input type="hidden" name="rating" id="rating-input" required>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-dark-blue">Enviar Avaliação</button>
-    </form>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const starRatingContainer = document.querySelector('.star-rating');
-    if (starRatingContainer) {
-        const stars = starRatingContainer.querySelectorAll('i');
-        const ratingInput = document.getElementById('rating-input');
-
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = this.getAttribute('data-rating');
-                ratingInput.value = rating;
-                stars.forEach(s => {
-                    if (s.getAttribute('data-rating') <= rating) {
-                        s.classList.remove('far');
-                        s.classList.add('fas');
-                    } else {
-                        s.classList.remove('fas');
-                        s.classList.add('far');
-                    }
-                });
-            });
-        });
-    }
-});
-</script>
+                <!--

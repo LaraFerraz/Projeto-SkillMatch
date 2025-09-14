@@ -5,6 +5,27 @@ require_once __DIR__ . '/../classes/Prestador.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prestadorObj = new Prestador($pdo);
 
+    // Tratamento do upload da foto
+    $foto_nome = '';
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $arquivo_tmp = $_FILES['foto']['tmp_name'];
+        $nome_original = $_FILES['foto']['name'];
+        $extensao = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
+
+        // Nome único para evitar conflito
+        $novo_nome = uniqid('perfil_') . '.' . $extensao;
+
+        // Pasta onde a imagem será salva
+        $caminho_destino = __DIR__ . '/../uploads/' . $novo_nome;
+
+        if (move_uploaded_file($arquivo_tmp, $caminho_destino)) {
+            $foto_nome = $novo_nome; // será salvo no banco
+        } else {
+            echo "Erro ao enviar a foto!";
+        }
+    }
+
+    // Dados do prestador
     $dados = [
         'nome' => $_POST['nome'],
         'email' => $_POST['email'],
@@ -13,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'localidade' => $_POST['localidade'],
         'descricao' => $_POST['descricao'],
         'cpf' => $_POST['cpf'],
-        'foto_perfil' => $_POST['foto'],
+        'foto_perfil' => $foto_nome, // aqui salvamos o nome do arquivo
         'tipo_servico' => $_POST['servico'],
-        'categoria1' => $_POST['categoria1'],
-        'categoria2' => $_POST['categoria2'],
-        'categoria3' => $_POST['categoria3'],
+        'categoria1' => $_POST['categoria1'] ?? '',
+        'categoria2' => $_POST['categoria2'] ?? '',
+        'categoria3' => $_POST['categoria3'] ?? '',
         'horario' => $_POST['horario']
     ];
 
@@ -37,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <br>
                     <h2 class="text-center fw-bold mb-4">Cadastro de Prestador</h2>
                     <p class="text-center text-muted mb-4">Junte-se à SkillMatch e encontre novos clientes para o seu negócio!</p>
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-12">
                                 <label for="nome" class="form-label fw-bold">Nome Completo</label>
@@ -62,7 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="col-12">
                                 <label for="servico" class="form-label fw-bold">Tipo de Serviço</label>
-                                <input type="text" class="form-control" id="servico" name="servico" placeholder="Ex: Eletricista, Design Gráfico..." required>
+                                <select class="form-select" id="servico" name="servico" required>
+                                    <option value="" selected>Selecione...</option>
+                                    <option value="Alimentação">Alimentação</option>
+                                    <option value="Beleza e Estética">Beleza e Estética</option>
+                                    <option value="Educação e Treinamento">Educação e Treinamento</option>
+                                    <option value="Eventos e Festas">Eventos e Festas</option>
+                                    <option value="Negócios">Negócios</option>
+                                    <option value="Reformas e Manutenção">Reformas e Manutenção</option>
+                                    <option value="Tecnologia e Design">Tecnologia e Design</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
                             </div>
                             <div class="col-12">
                                 <label for="categoria1" class="form-label fw-bold">Categoria de Serviço 1</label>

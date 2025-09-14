@@ -199,7 +199,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-             <a href="index.php?page=cad" class="btn btn-secondary-blue me-3">Cadastre-se</a>
+             <a href="index.php?page=cadastro" class="btn btn-secondary-blue me-3">Cadastre-se</a>
             <a href="index.php?page=sobre" class="btn btn-secondary-blue me-3">Saiba Mais</a>
     </div>
 </section>

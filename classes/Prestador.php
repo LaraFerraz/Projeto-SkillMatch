@@ -10,9 +10,9 @@ class Prestador {
     public function cadastrar($dados) {
         $stmt = $this->pdo->prepare("
             INSERT INTO prestadores 
-            (nome, email, senha, telefone, localidade, cpf, foto_perfil, tipo_servico, categoria1, categoria2, categoria3, horario) 
+            (nome, email, senha, telefone, localidade, descricao, cpf, foto_perfil, tipo_servico, categoria1, categoria2, categoria3, horario) 
             VALUES 
-            (:nome, :email, :senha, :telefone, :localidade, :cpf, :foto_perfil, :tipo_servico, :categoria1, :categoria2, :categoria3, :horario)
+            (:nome, :email, :senha, :telefone, :localidade, :descricao, :cpf, :foto_perfil, :tipo_servico, :categoria1, :categoria2, :categoria3, :horario)
         ");
 
         $stmt->execute([
@@ -21,6 +21,7 @@ class Prestador {
             ':senha'       => password_hash($dados['senha'], PASSWORD_DEFAULT),
             ':telefone'    => $dados['telefone'],
             ':localidade'  => $dados['localidade'],
+            'descricao'    => $dados['descricao'],
             ':cpf'         => $dados['cpf'],
             ':foto_perfil' => $dados['foto_perfil'],
             ':tipo_servico'=> $dados['tipo_servico'],
@@ -43,7 +44,8 @@ class Prestador {
                 nome=:nome, 
                 email=:email, 
                 telefone=:telefone, 
-                localidade=:localidade, 
+                localidade=:localidade,
+                descricao=:descricao, 
                 foto_perfil=:foto_perfil, 
                 tipo_servico=:tipo_servico, 
                 categoria1=:categoria1, 
@@ -66,6 +68,7 @@ class Prestador {
             ':email'       => $dados['email'],
             ':telefone'    => $dados['telefone'],
             ':localidade'  => $dados['localidade'],
+            ':descricao'   => $dados['descricao'],
             ':foto_perfil' => $dados['foto_perfil'],
             ':tipo_servico'=> $dados['tipo_servico'],
             ':categoria1'  => $dados['categoria1'],

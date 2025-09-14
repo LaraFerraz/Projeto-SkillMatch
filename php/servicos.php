@@ -34,7 +34,10 @@ try {
                 <?php foreach ($prestadores as $prestador): ?>
                     <div class="col prestador-card">
                         <div class="service-card h-100">
-                            <img src="<?php echo htmlspecialchars($prestador['foto_perfil'] ?? 'https://via.placeholder.com/150x150.png?text=Sem+Foto'); ?>" class="service-img" alt="Foto do prestador">
+                            <img src="uploads/<?php echo htmlspecialchars($prestador['foto_perfil'] ?? 'placeholder.png'); ?>" 
+                            alt="Foto do Prestador" 
+                            class="rounded-circle" 
+                            style="width: 150px; height: 150px; object-fit: cover;">
                             <div class="service-info">
                                 <h5 class="fw-bold mb-1"><?php echo htmlspecialchars($prestador['nome']); ?></h5>
 
