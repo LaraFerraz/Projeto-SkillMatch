@@ -5,7 +5,7 @@ require_once __DIR__ . '/../classes/Prestador.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['prestador_id'])) {
-    header('Location: index.php?page=login');
+    header('Location: index.php?page=login.php');
     exit;
 }
 

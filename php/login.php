@@ -10,21 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha = $_POST['senha'] ?? '';
 
     $prestadorObj = new Prestador($pdo);
+    $prestador = $prestadorObj->validarLogin($email, $senha);
 
-    // Buscar prestador pelo email
-    $stmt = $pdo->prepare("SELECT * FROM prestadores WHERE email = :email");
-    $stmt->execute([':email' => $email]);
-    $prestador = $stmt->fetch();
-
-    if ($prestador && password_verify($senha, $prestador['senha'])) {
-        // Login correto → salvar id na sessão
+    if ($prestador) {
         $_SESSION['prestador_id'] = $prestador['id'];
-
-        // Redirecionar para perfil
-        header('Location: ../index.php?page=perfil');
+        header('Location: index.php?page=perfil'); // caminho absoluto
         exit;
     } else {
-        $erro = "Email ou senha incorretos!";
+        $erro = "E-mail ou senha incorretos!";
     }
 }
 ?>
@@ -36,19 +29,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <br>
                     <h2 class="text-center fw-bold mb-4">Acesse sua Conta</h2>
                     <p class="text-center text-muted mb-4">Entre para gerenciar seu perfil, clientes e avaliações.</p>
-                    <form action="index.php?page=perfil" method="POST">
-    <div class="mb-3">
-        <label for="loginEmail" class="form-label fw-bold">E-mail</label>
-        <input type="email" class="form-control" id="loginEmail" name="email" required>
-    </div>
-    <div class="mb-3">
-        <label for="loginPassword" class="form-label fw-bold">Senha</label>
-        <input type="password" class="form-control" id="loginPassword" name="senha" required>
-    </div>
-     <div class="d-grid gap-2 mt-4">
+                    
+                    <?php if ($erro): ?>
+                        <div class="alert alert-danger"><?= $erro ?></div>
+                    <?php endif; ?>
+
+                    <form action="" method="POST">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label fw-bold">E-mail</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label fw-bold">Senha</label>
+                            <input type="password" class="form-control" id="loginPassword" name="senha" required>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-dark-blue btn-lg">Entrar</button>
                         </div>
-    </form>
+                    </form>
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descricao' => $_POST['descricao'],
         'cpf' => $_POST['cpf'],
         'foto_perfil' => $_POST['foto'],
+        'tipo_servico' => $_POST['servico'],
         'categoria1' => $_POST['categoria1'],
         'categoria2' => $_POST['categoria2'],
         'categoria3' => $_POST['categoria3'],
@@ -22,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $prestadorObj->cadastrar($dados);
 
-    header('Location: ../index.php?page=login');
+    header('Location: index.php?page=login.php');
     exit;
 }
 ?>

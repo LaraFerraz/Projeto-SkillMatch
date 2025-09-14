@@ -6,6 +6,7 @@ class Prestador {
         $this->pdo = $pdo;
     }
 
+    // Cadastra um novo prestador
     public function cadastrar($dados) {
         $stmt = $this->pdo->prepare("
             INSERT INTO prestadores 
@@ -28,8 +29,14 @@ class Prestador {
             ':categoria3'  => $dados['categoria3'],
             ':horario'     => $dados['horario']
         ]);
+            
+    header('Location: index.php?page=login');
+    exit;
     }
 
+
+
+    // Atualiza os dados do prestador
     public function atualizar($dados) {
         $sql = "
             UPDATE prestadores SET 
@@ -74,15 +81,45 @@ class Prestador {
         $stmt->execute($params);
     }
 
-    public function buscarPorId($id) {
+
+
+
+// Busca prestador pelo ID
+ public function buscarPorId($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM prestadores WHERE id = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
-
-    public function excluir($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM prestadores WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+// Exclui prestador pelo ID
+    public function buscarPorEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT * FROM prestadores WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        return $stmt->fetch();
     }
+// Valida login do prestador
+    public function validarLogin($email, $senha) {
+        $prestador = $this->buscarPorEmail($email);
+
+        if ($prestador && password_verify($senha, $prestador['senha'])) {
+            return $prestador; // retorna os dados do usuário logado
+           
+        }
+
+        return false; // login inválido
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 ?>
